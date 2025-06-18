@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trash Classifier UI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">Trash Classifier</div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Upload</a>
+            <a href="#">About</a>
+            <a href="#">Guide</a>
+        </nav>
+    </div>
+    <div class="container">
+        <div class="main-content">
+            <div class="left-column">
+                <div class="upload-box">
+                    <p>Drag and drop your image here or</p>
+                    <button>Choose File</button>
+                </div>
+                <div class="preview">
+                    <h3>Result</h3>
+                    <img src="https://via.placeholder.com/400x400" alt="Preview">
+                    <p>Plastic: 92% | Paper: 85%</p>
+                </div>
+            </div>
+            <div class="right-column">
+                <div class="metric-card">
+                    <h3>Model Metrics</h3>
+                    <p>Precision: 0.899</p>
+                    <p>Recall: 0.851</p>
+                    <p>mAP@0.5: 0.915</p>
+                    <p>mAP@0.5:0.95: 0.652</p>
+                </div>
+                <div class="metric-card">
+                    <h3>Class Distribution</h3>
+                    <p>Plastic: 500 instances</p>
+                    <p>Paper: 306 instances</p>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar">
+            <h3>Recycling Guide</h3>
+            <ul>
+                <li>Plastic: Wash before recycling</li>
+                <li>Paper: Avoid wet paper</li>
+            </ul>
+            <h3>History</h3>
+            <div class="history-item">
+                <img src="https://via.placeholder.com/50x50" alt="History">
+                <p>Plastic: 2025-05-23</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

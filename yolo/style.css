@@ -1,0 +1,137 @@
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+body {
+    background: #F5F5F5;
+}
+.header {
+    background: #2E7D32;
+    color: #FFFFFF;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+}
+.header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+.header nav a {
+    color: #FFFFFF;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 16px;
+}
+.header nav a:hover {
+    text-decoration: underline;
+}
+.container {
+    display: flex;
+    min-height: calc(100vh - 80px);
+}
+.main-content {
+    flex: 1;
+    display: flex;
+    padding: 20px;
+}
+.left-column {
+    width: 60%;
+    padding: 20px;
+}
+.upload-box {
+    border: 2px dashed #4CAF50;
+    padding: 20px;
+    text-align: center;
+    background: #FFFFFF;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+.upload-box p {
+    color: #333333;
+    font-size: 16px;
+}
+.upload-box button {
+    background: #4CAF50;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.upload-box button:hover {
+    background: #45A049;
+}
+.preview {
+    background: #FFFFFF;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.preview img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+.right-column {
+    width: 40%;
+    padding: 20px;
+}
+.metric-card {
+    background: #FFFFFF;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+.metric-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.sidebar {
+    width: 300px;
+    background: #E3F2FD;
+    padding: 20px;
+}
+.sidebar h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333333;
+}
+.sidebar ul {
+    list-style: none;
+}
+.sidebar ul li {
+    margin-bottom: 10px;
+    color: #333333;
+}
+.sidebar .history-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.sidebar .history-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    .main-content {
+        flex-direction: column;
+    }
+    .left-column, .right-column {
+        width: 100%;
+    }
+    .sidebar {
+        width: 100%;
+    }
+}
+</style>

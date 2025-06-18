@@ -1,0 +1,5 @@
+names: ['Paper', 'Plastic', 'Glass', 'Metal', 'Organic', 'Miscellaneous']
+nc: 6
+train: ./garbage_dataset/train/balanced_images
+val: ./garbage_dataset/valid/balanced_images
+test: ./garbage_dataset/test/images

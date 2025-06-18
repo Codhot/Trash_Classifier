@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Trash Classifier</title>
+      <style>
+          * {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+              font-family: 'Roboto', sans-serif;
+          }
+          body {
+              background: #F5F5F5;
+          }
+          .header {
+              background: #2E7D32;
+              color: #FFFFFF;
+              padding: 20px;
+              text-align: center;
+              font-size: 24px;
+              font-weight: bold;
+          }
+          .container {
+              max-width: 1200px;
+              margin: 20px auto;
+              display: flex;
+              gap: 20px;
+          }
+          .main-content {
+              flex: 1;
+              display: flex;
+              gap: 20px;
+          }
+          .left-column {
+              width: 60%;
+              background: #FFFFFF;
+              padding: 20px;
+              border-radius: 8px;
+              box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+          }
+          .upload-box {
+              border: 2px dashed #4CAF50;
+              padding: 20px;
+              text-align: center;
+              margin-bottom: 20px;
+          }
+          .upload-box input {
+              margin-top: 10px;
+          }
+          .upload-box button {
+              background: #4CAF50;
+              color: #FFFFFF;
+              border: none;
+              padding: 10px 20px;
+              border-radius: 4px;
+              cursor: pointer;
+          }
+          .upload-box button:hover {
+              background: #45A049;
+          }
+          .result img {
+              max-width: 100%;
+              border-radius: 8px;
+          }
+          .error {
+              color: #D32F2F;
+              font-size: 16px;
+              margin-top: 10px;
+          }
+          .right-column {
+              width: 40%;
+              background: #FFFFFF;
+              padding: 20px;
+              border-radius: 8px;
+              box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+          }
+          .metric-card {
+              margin-bottom: 20px;
+          }
+          .metric-card h3 {
+              font-size: 18px;
+              margin-bottom: 10px;
+              color: #333333;
+          }
+          .sidebar {
+              width: 300px;
+              background: #E3F2FD;
+              padding: 20px;
+              border-radius: 8px;
+              box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+          }
+          .sidebar h3 {
+              font-size: 18px;
+              margin-bottom: 10px;
+              color: #333333;
+          }
+          .sidebar ul {
+              list-style: none;
+              color: #333333;
+          }
+          .sidebar ul li {
+              margin-bottom: 10px;
+          }
+          @media (max-width: 768px) {
+              .container {
+                  flex-direction: column;
+              }
+              .main-content {
+                  flex-direction: column;
+              }
+              .left-column, .right-column {
+                  width: 100%;
+              }
+              .sidebar {
+                  width: 100%;
+              }
+          }
+      </style>
+  </head>
+  <body>
+      <div class="header">
+          Trash Classifier
+      </div>
+      <div class="container">
+          <div class="main-content">
+              <div class="left-column">
+                  <div class="upload-box">
+                      <form method="post" enctype="multipart/form-data">
+                          <p>Drag and drop or choose an image</p>
+                          <input type="file" name="file" accept="image/*">
+                          <button type="submit">Detect</button>
+                      </form>
+                  </div>
+                  <div class="result">
+                      {% if error %}
+                          <p class="error">{{ error }}</p>
+                      {% endif %}
+                      {% if image_data %}
+                          <h3>Result</h3>
+                          <img src="data:image/jpeg;base64,{{ image_data }}" alt="Result">
+                          <h4>Detected Classes:</h4>
+                          <ul>
+                              {% for label in labels %}
+                                  <li>{{ label.name }}: {{ (label.confidence * 100)|round(2) }}%</li>
+                              {% endfor %}
+                          </ul>
+                      {% endif %}
+                  </div>
+              </div>
+              <div class="right-column">
+                  <div class="metric-card">
+                      <h3>Model Metrics</h3>
+                      <p>Precision: 0.899</p>
+                      <p>Recall: 0.851</p>
+                      <p>mAP@0.5: 0.915</p>
+                      <p>mAP@0.5:0.95: 0.652</p>
+                  </div>
+                  <div class="metric-card">
+                      <h3>Class Distribution</h3>
+                      <p>Plastic: 500 instances</p>
+                      <p>Paper: 306 instances</p>
+                      <p>Metal: 531 instances</p>
+                      <p>Miscellaneous: 229 instances</p>
+                      <p>Organic: 170 instances</p>
+                      <p>Glass: 136 instances</p>
+                  </div>
+              </div>
+          </div>
+          <div class="sidebar">
+              <h3>Recycling Guide</h3>
+              <ul>
+                  <li>Plastic: Wash before recycling</li>
+                  <li>Paper: Avoid wet paper</li>
+                  <li>Glass: Separate by color</li>
+                  <li>Metal: Clean cans and foil</li>
+                  <li>Organic: Compost food waste</li>
+                  <li>Miscellaneous: Check local rules</li>
+              </ul>
+          </div>
+      </div>
+  </body>
+  </html>
