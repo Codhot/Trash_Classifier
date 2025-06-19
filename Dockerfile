@@ -12,10 +12,8 @@ ENV PIP_NO_CACHE_DIR=1
 COPY requirements.txt .
 
 # Instal dependensi Python
-# PENTING: Ubah URL index-url agar sesuai dengan PyTorch 1.13.1 CPU
-# Perhatikan bahwa untuk versi lama, URL-nya bisa berbeda (terkadang tanpa /whl/cpu di akhir)
-# Namun, https://download.pytorch.org/whl/cpu/ tetap bisa diakses untuk 1.13.1 CPU
-RUN pip install -r requirements.txt --index-url https://download.pytorch.org/whl/cpu
+# PENTING: Gunakan --index-url untuk PyTorch, dan --extra-index-url untuk PyPI standar
+RUN pip install -r requirements.txt --index-url https://download.pytorch.org/whl/cpu --extra-index-url https://pypi.org/simple
 
 # -- STAGE 2: Production Environment (Image Akhir yang Lebih Kecil) --
 # Menggunakan base image yang sama untuk konsistensi di environment produksi
