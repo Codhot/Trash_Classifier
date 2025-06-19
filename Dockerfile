@@ -6,7 +6,7 @@ FROM python:3.10-slim-buster as builder
 # Atur direktori kerja di dalam container builder
 WORKDIR /app
 
-# Nonaktifkan cache pip secara default untuk menjaga ukuran image
+# Nonaktifkan cache pip secara default untuk menjaga ukuran imageee
 ENV PIP_NO_CACHE_DIR=1
 
 # Buat virtual environment
