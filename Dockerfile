@@ -39,7 +39,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 # Salin semua file aplikasi yang diperlukan ke image final
 COPY Procfile .
 COPY app.py .
-COPY gunicorn_config.py . # SALIN FILE KONFIGURASI GUNICORN
+# COPY gunicorn_config.py . # SALIN FILE KONFIGURASI GUNICORN
 COPY yolov5 ./yolov5
 COPY static ./static
 
@@ -48,4 +48,4 @@ EXPOSE 5000
 
 # Perintah default untuk menjalankan aplikasi menggunakan Gunicorn
 # Gunakan -c untuk menentukan file konfigurasi Gunicorn
-CMD ["gunicorn", "-c", "gunicorn_config.py", "app:app"] 
+CMD ["gunicorn", "app:app"] 
