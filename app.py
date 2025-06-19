@@ -152,4 +152,4 @@ def index():
 # --- Jalankan Aplikasi Flask ---
 if __name__ == '__main__':
     # Mode debug=True harus dihindari di produksi
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # app.run(debug=True, host='0.0.0.0', port=5000)
