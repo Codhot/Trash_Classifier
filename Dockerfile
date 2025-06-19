@@ -14,7 +14,6 @@ COPY requirements.txt .
 # Instal dependensi Python
 # PENTING: Gunakan --index-url untuk PyTorch, dan --extra-index-url untuk PyPI standar
 RUN pip install -r requirements.txt --index-url https://download.pytorch.org/whl/cpu --extra-index-url https://pypi.org/simple
-
 # -- STAGE 2: Production Environment (Image Akhir yang Lebih Kecil) --
 # Menggunakan base image yang sama untuk konsistensi di environment produksi
 FROM python:3.10-slim-buster
