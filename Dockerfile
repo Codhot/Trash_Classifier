@@ -15,7 +15,7 @@ RUN python -m venv /opt/venv
 # Aktifkan virtual environment
 ENV PATH="/opt/venv/bin:$PATH"
 
-# Salin hanya file requirements.txt terlebih dahulu untuk memanfaatkan Docker cache layer
+# Salin hanya file requirements.txt terlebih dahulu untuk memanfaatkan Docker cache layer    
 COPY requirements.txt .
 
 # Instal dependensi Python di dalam virtual environment
