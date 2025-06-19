@@ -8,12 +8,19 @@ WORKDIR /app
 # Nonaktifkan cache pip secara default untuk menjaga ukuran image
 ENV PIP_NO_CACHE_DIR=1
 
+# Buat virtual environment
+RUN python -m venv /opt/venv
+
+# Aktifkan virtual environment
+ENV PATH="/opt/venv/bin:$PATH"
+
 # Salin hanya file requirements.txt terlebih dahulu untuk memanfaatkan Docker cache layer
 COPY requirements.txt .
 
-# Instal dependensi Python
+# Instal dependensi Python di dalam virtual environment
 # PENTING: Gunakan --index-url untuk PyTorch, dan --extra-index-url untuk PyPI standar
 RUN pip install -r requirements.txt --index-url https://download.pytorch.org/whl/cpu --extra-index-url https://pypi.org/simple
+
 # -- STAGE 2: Production Environment (Image Akhir yang Lebih Kecil) --
 # Menggunakan base image yang sama untuk konsistensi di environment produksi
 FROM python:3.10-slim-buster
