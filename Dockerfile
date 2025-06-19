@@ -1,46 +1,46 @@
-# -- STAGE 1: Build Environment (untuk instalasi PyTorch CPU yang spesifik) --
-# Menggunakan base image Python yang lebih kecil dan stabil
+# -- STAGE 1: Build Environment --
+# Menggunakan base image Python yang ringan dan stabil untuk build
 FROM python:3.10-slim-buster as builder
 
-# Atur direktori kerja di dalam container
+# Atur direktori kerja di dalam container builder
 WORKDIR /app
 
 # Nonaktifkan cache pip secara default untuk menjaga ukuran image
 ENV PIP_NO_CACHE_DIR=1
 
-# Salin hanya file requirements.txt terlebih dahulu
-# Ini memanfaatkan Docker cache layer. Jika requirements.txt tidak berubah,
-# layer instalasi pip tidak perlu dibangun ulang.
+# Salin hanya file requirements.txt terlebih dahulu untuk memanfaatkan Docker cache layer
 COPY requirements.txt .
 
 # Instal dependensi Python
-# Penting: Menggunakan --index-url untuk memastikan PyTorch versi CPU diunduh
+# PENTING: Ubah URL index-url agar sesuai dengan PyTorch 1.13.1 CPU
+# Perhatikan bahwa untuk versi lama, URL-nya bisa berbeda (terkadang tanpa /whl/cpu di akhir)
+# Namun, https://download.pytorch.org/whl/cpu/ tetap bisa diakses untuk 1.13.1 CPU
 RUN pip install -r requirements.txt --index-url https://download.pytorch.org/whl/cpu
 
-# -- STAGE 2: Production Environment (lebih kecil dan lebih aman) --
-# Menggunakan base image yang sama untuk konsistensi, tapi tanpa build tools
+# -- STAGE 2: Production Environment (Image Akhir yang Lebih Kecil) --
+# Menggunakan base image yang sama untuk konsistensi di environment produksi
 FROM python:3.10-slim-buster
 
 # Atur direktori kerja di dalam container produksi
 WORKDIR /app
 
-# Salin virtual environment yang sudah dibuat dari stage 'builder'
+# Salin virtual environment yang sudah diinstal dari stage 'builder'
+# Ini membawa semua library yang sudah diinstal tanpa build tools
 COPY --from=builder /opt/venv /opt/venv
 
-# Aktifkan virtual environment yang sudah diinstal
+# Aktifkan virtual environment di PATH
 ENV PATH="/opt/venv/bin:$PATH"
 
-# Salin semua file aplikasi yang diperlukan
-# Perhatikan urutan agar layer cache lebih efisien
+# Salin semua file aplikasi yang diperlukan ke image final
+# Urutan ini membantu caching Docker
 COPY Procfile .
 COPY app.py .
 COPY yolov5 ./yolov5
 COPY static ./static
 
-# Expose port yang akan digunakan aplikasi (misalnya 5000, tapi Railway akan override dengan $PORT)
-# Ini lebih sebagai dokumentasi dan bisa dihapus jika tidak diperlukan.
+# (Opsional) Mengindikasikan port yang didengarkan, untuk dokumentasi
 EXPOSE 5000
 
-# Command untuk menjalankan aplikasi menggunakan Gunicorn
-# Railway akan menginjeksikan variabel $PORT secara otomatis
+# Perintah default untuk menjalankan aplikasi menggunakan Gunicorn
+# Railway akan mengganti $PORT dengan port yang sebenarnya
 CMD ["gunicorn", "app:app", "-b", "0.0.0.0:$PORT"]
