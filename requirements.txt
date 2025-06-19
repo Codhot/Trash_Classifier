@@ -1,7 +1,7 @@
 flask>=2.0.1
 # torch==2.3.0+cpu # Contoh versi spesifik CPU, sesuaikan dengan versi torch yang ingin kamu gunakan
 # atau jika ingin yang terbaru dan hanya versi CPU:
-torch --index-url https://download.pytorch.org/whl/cpuultralytics
+# torch --index-url https://download.pytorch.org/whl/cpuultralytics
 # opencv-python # Opsional, jika tidak digunakan hapus saja
 pillow
 pandas
