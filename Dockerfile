@@ -48,5 +48,4 @@ EXPOSE 5000
 
 # Perintah default untuk menjalankan aplikasi menggunakan Gunicorn
 # Gunakan -c untuk menentukan file konfigurasi Gunicorn
-CMD exec gunicorn --bind 0.0.0.0:$PORT app:app
-
+CMD gunicorn --bind 0.0.0.0:$PORT app:app
