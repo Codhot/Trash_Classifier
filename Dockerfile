@@ -44,8 +44,8 @@ COPY yolov5 ./yolov5
 COPY static ./static
 
 # (Opsional) Mengindikasikan port yang didengarkan, untuk dokumentasi
-EXPOSE 5000
+EXPOSE 8000
 
 # Perintah default untuk menjalankan aplikasi menggunakan Gunicorn
 # Gunakan -c untuk menentukan file konfigurasi Gunicorn
-CMD gunicorn app:app
+CMD ["/bin/bash", "-c", "gunicorn run:app –bind 0.0.0.0:$PORT"]
